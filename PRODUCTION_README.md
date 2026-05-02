@@ -410,3 +410,5 @@ The frontend is production-ready. Build with `npm run build` and deploy to Verce
 ✅ Role-based dashboards
 ✅ Responsive design
 ✅ Performance optimized
+
+Maintained by PS-Chakradhar.
