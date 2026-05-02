@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Sidebar from './components/Sidebar';
 import TopAppBar from './components/Navbar';
@@ -27,21 +28,33 @@ const DashboardLayout = () => {
         <TopAppBar />
 
         {/* Content */}
-        <div className="flex-1 p-8 lg:p-12 z-10">
-          {user.role === 'admin' && <AdminDashboard />}
-          {user.role === 'auditor' && <AuditorDashboard />}
-          {user.role === 'public' && <PublicDashboard />}
+        <div className="flex-1 p-6 lg:p-10 z-10">
+          <Routes>
+            <Route index element={
+              <>
+                {user.role === 'admin' && <AdminDashboard />}
+                {user.role === 'auditor' && <AuditorDashboard />}
+                {user.role === 'public' && <PublicDashboard />}
+              </>
+            } />
+            <Route path="ledger" element={<PublicDashboard />} />
+            <Route path="audit" element={<AuditorDashboard />} />
+            <Route path="health" element={<PublicDashboard />} />
+            <Route path="admin" element={<AdminDashboard />} />
+            <Route path="settings" element={<SettingsPlaceholder />} />
+          </Routes>
         </div>
 
         {/* Footer */}
-        <footer className="w-full flex flex-col items-center justify-center gap-6 px-8 py-12 border-t border-white/5 bg-slate-950 z-20 relative">
+        <footer className="w-full flex flex-col items-center justify-center gap-4 px-6 py-8 border-t border-white/5 bg-slate-950 z-20 relative">
           <div className="flex gap-6 flex-wrap justify-center">
-            <a href="#" className="font-['Manrope'] text-xs uppercase tracking-widest text-slate-500 hover:text-white transition-colors">Whitepaper</a>
-            <a href="#" className="font-['Manrope'] text-xs uppercase tracking-widest text-slate-500 hover:text-white transition-colors">Governance</a>
-            <a href="#" className="font-['Manrope'] text-xs uppercase tracking-widest text-slate-500 hover:text-white transition-colors">API Docs</a>
-            <a href="#" className="font-['Manrope'] text-xs uppercase tracking-widest text-slate-500 hover:text-white transition-colors">Security Audit</a>
+            {['Whitepaper', 'Governance', 'API Docs', 'Security Audit'].map((link) => (
+              <button key={link} onClick={() => toast(`${link} — coming soon`, { icon: '📄' })} className="font-['Manrope'] text-[10px] uppercase tracking-widest text-slate-500 hover:text-white transition-colors">
+                {link}
+              </button>
+            ))}
           </div>
-          <p className="font-['Manrope'] text-xs uppercase tracking-widest text-slate-500">
+          <p className="font-['Manrope'] text-[10px] uppercase tracking-widest text-slate-500">
             © 2024 TrustChain Protocol. Decentralized Ledger Systems.
           </p>
         </footer>
@@ -49,6 +62,35 @@ const DashboardLayout = () => {
     </div>
   );
 };
+
+/* Settings placeholder page */
+const SettingsPlaceholder = () => (
+  <div className="space-y-6">
+    <header>
+      <h1 className="font-['Manrope'] text-3xl font-extrabold text-on-surface mb-1">Settings</h1>
+      <p className="font-['Manrope'] text-sm text-on-surface-variant">Configure node preferences and account parameters.</p>
+    </header>
+    <div className="glass-panel rounded-xl p-6">
+      <div className="space-y-4">
+        {[
+          { label: 'Network', value: 'Polygon Mumbai Testnet', icon: 'lan' },
+          { label: 'Gas Strategy', value: 'Standard (Auto)', icon: 'local_gas_station' },
+          { label: 'Notifications', value: 'Enabled', icon: 'notifications_active' },
+          { label: 'Theme', value: 'Dark Mode', icon: 'dark_mode' },
+          { label: 'Language', value: 'English', icon: 'translate' },
+        ].map((item) => (
+          <div key={item.label} className="flex justify-between items-center p-3 rounded-lg bg-surface-container-high/50 border border-outline-variant/20">
+            <div className="flex items-center gap-3">
+              <span className="material-symbols-outlined text-[18px] text-outline">{item.icon}</span>
+              <span className="font-['Manrope'] text-sm font-semibold text-on-surface">{item.label}</span>
+            </div>
+            <span className="font-['Manrope'] text-xs text-on-surface-variant">{item.value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
 
 const App = () => (
   <AuthProvider>

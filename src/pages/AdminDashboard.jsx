@@ -6,7 +6,7 @@ import { disburseAPI } from '../utils/api';
 const NETWORK_BG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuAC9vLWXSvwSI2h0CKq34bMTqAhkF-bPwiZlrLWO-t4h-XiKCBB7PLHJwpFhA1JHM9iwKTQjtITrUNJ5xLatfRJrzmkz7V46u6cDKIKwAQuCKznelploTBoyxJ_gB-rzVHXV1lqRXRzp8OlgmzD10OM8WTRMXN55GQu3E6qPIiVqyyd67nVrEL7saCtk8WzgG-OsZYb_CEwwuHWqsf2exuSPp4acbmqCYOM47YDkO1qP8maoJrorXcJHyfbwFOtcf-eweqL23sHKcc';
 
 const AdminDashboard = () => {
-  const [formData, setFormData] = useState({ asset: 'USDC (Ethereum Mainnet)', target: '', amount: '' });
+  const [formData, setFormData] = useState({ asset: 'PM-KISAN (Direct Benefit)', target: '', amount: '' });
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async () => {
@@ -148,11 +148,11 @@ const AdminDashboard = () => {
                   <select
                     value={formData.asset}
                     onChange={(e) => setFormData({ ...formData, asset: e.target.value })}
-                    className="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-3 font-body-base text-on-surface appearance-none focus:outline-none focus:border-primary-container input-well"
+                    className="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-3 font-['Manrope'] text-sm text-on-surface appearance-none focus:outline-none focus:border-primary-container input-well"
                   >
-                    <option>USDC (Ethereum Mainnet)</option>
-                    <option>USDT (Polygon)</option>
-                    <option>WETH (Arbitrum)</option>
+                    <option>PM-KISAN (Direct Benefit)</option>
+                    <option>MGNREGA (Wage Disbursement)</option>
+                    <option>PMAY (Housing Subsidy)</option>
                   </select>
                   <span className="material-symbols-outlined absolute right-3 top-3 text-outline pointer-events-none">expand_more</span>
                 </div>
@@ -181,34 +181,34 @@ const AdminDashboard = () => {
                 </div>
                 <label className="block font-label-caps text-label-caps text-on-surface-variant mb-2 uppercase">Amount</label>
                 <div className="relative flex items-center">
-                  <span className="absolute left-3 text-outline font-body-base">$</span>
+                  <span className="absolute left-3 text-outline font-['Manrope'] text-sm">₹</span>
                   <input
                     type="number"
                     value={formData.amount}
                     onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                     placeholder="0.00"
-                    className="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-3 pl-8 font-body-base text-on-surface focus:outline-none focus:border-secondary input-well text-right font-mono text-lg"
+                    className="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-3 pl-8 font-['Manrope'] text-on-surface focus:outline-none focus:border-secondary input-well text-right font-mono text-base"
                   />
                 </div>
                 <div className="flex justify-between mt-2">
-                  <span className="font-label-caps text-label-caps text-outline">Available: 1,250,000.00 USDC</span>
-                  <button className="font-label-caps text-label-caps text-primary-container hover:underline">MAX</button>
+                  <span className="font-['Manrope'] text-[10px] text-outline uppercase tracking-wider">Available: ₹12,50,000.00</span>
+                  <button className="font-['Manrope'] text-[10px] text-primary-container hover:underline uppercase tracking-wider">MAX</button>
                 </div>
               </div>
             </div>
 
             {/* Action Area */}
             <div className="mt-8 pt-6 border-t border-outline-variant/30">
-              <div className="flex justify-between items-center mb-4">
-                <span className="font-body-sm text-body-sm text-on-surface-variant">Estimated Network Fee</span>
-                <span className="font-body-sm text-body-sm text-on-surface font-mono">~$12.45</span>
+              <div className="flex justify-between items-center mb-3">
+                <span className="font-['Manrope'] text-xs text-on-surface-variant">Estimated Gas Fee</span>
+                <span className="font-['Manrope'] text-xs text-on-surface font-mono">~₹1,045</span>
               </div>
               <button
                 onClick={handleSubmit}
                 disabled={submitting}
-                className="w-full bg-primary-container text-on-primary-container py-4 rounded-xl font-headline-md text-headline-md clay-btn hover:opacity-90 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full bg-primary-container text-on-primary-container py-2.5 rounded-lg font-['Manrope'] text-sm font-bold clay-btn hover:opacity-90 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
               >
-                <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>fingerprint</span>
+                <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>fingerprint</span>
                 {submitting ? 'Processing...' : 'Authorize Disbursement'}
               </button>
               <p className="font-label-caps text-label-caps text-outline text-center mt-3 flex items-center justify-center gap-1">

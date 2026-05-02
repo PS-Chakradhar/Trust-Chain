@@ -10,22 +10,22 @@ const BARS = [
 ];
 
 const TRANSACTIONS = [
-  { hash: '0x8f...3a2b', type: 'Liquidity Provision', amount: '45,000 USDC', status: 'verified', time: '2 mins ago' },
+  { hash: '0x8f...3a2b', type: 'Fund Disbursement', amount: '₹45,00,000', status: 'verified', time: '2 mins ago' },
   { hash: '0x1c...9d4f', type: 'Contract Execution', amount: '--', status: 'flagged', time: '5 mins ago' },
-  { hash: '0x4a...2e11', type: 'Asset Transfer', amount: '120.5 ETH', status: 'verified', time: '12 mins ago' },
-  { hash: '0x7b...c4d8', type: 'Stake Deposit', amount: '500 MATIC', status: 'verified', time: '18 mins ago' },
+  { hash: '0x4a...2e11', type: 'Beneficiary Transfer', amount: '₹12,50,000', status: 'verified', time: '12 mins ago' },
+  { hash: '0x7b...c4d8', type: 'Subsidy Deposit', amount: '₹5,00,000', status: 'verified', time: '18 mins ago' },
 ];
 
 const PublicDashboard = () => {
   const maxVal = Math.max(...BARS.map(b => b.value));
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-8">
       {/* Page Header */}
       <div className="flex justify-between items-end">
         <div>
-          <h1 className="font-display-lg text-display-lg text-on-surface drop-shadow-md">Global Ledger</h1>
-          <p className="font-body-base text-body-base text-on-surface-variant mt-2 max-w-2xl">
+          <h1 className="font-['Manrope'] text-3xl font-extrabold text-on-surface drop-shadow-md">Global Ledger</h1>
+          <p className="font-['Manrope'] text-sm text-on-surface-variant mt-1 max-w-2xl">
             Real-time monitoring of decentralized fund distribution and network consensus across all active validator nodes.
           </p>
         </div>
@@ -50,9 +50,9 @@ const PublicDashboard = () => {
           </div>
 
           {/* Bar Chart */}
-          <div className="h-64 flex items-end justify-between gap-4 relative z-10 mt-auto pt-10 border-b border-white/5 pb-4">
+          <div className="h-44 flex items-end justify-between gap-4 relative z-10 mt-auto pt-6 border-b border-white/5 pb-3">
             {BARS.map((bar, i) => {
-              const height = (bar.value / maxVal) * 240;
+              const height = (bar.value / maxVal) * 160;
               const isPeak = bar.value === maxVal;
               return (
                 <motion.div
@@ -93,7 +93,7 @@ const PublicDashboard = () => {
               <span className="material-symbols-outlined text-secondary">deployed_code</span>
               <span className="font-label-caps text-label-caps text-on-surface-variant">Total Value Locked</span>
             </div>
-            <div className="font-display-lg text-display-lg text-on-surface">$1.42B</div>
+            <div className="font-['Manrope'] text-3xl font-extrabold text-on-surface">₹142 Cr</div>
             <div className="mt-2 text-secondary font-body-sm text-body-sm flex items-center gap-1">
               <span className="material-symbols-outlined text-sm">trending_up</span>
               +5.2% vs last week
