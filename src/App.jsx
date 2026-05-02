@@ -98,7 +98,14 @@ const App = () => (
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/public" element={<PublicDashboard />} />
+        <Route path="/public" element={
+          <div className="bg-background text-on-background font-body-base antialiased min-h-screen flex flex-col">
+            <TopAppBar showNav />
+            <div className="flex-1 max-w-6xl mx-auto w-full px-6 py-8">
+              <PublicDashboard />
+            </div>
+          </div>
+        } />
         <Route path="/dashboard/*" element={
           <ProtectedRoute allowedRoles={['admin', 'auditor', 'public']}>
             <DashboardLayout />
